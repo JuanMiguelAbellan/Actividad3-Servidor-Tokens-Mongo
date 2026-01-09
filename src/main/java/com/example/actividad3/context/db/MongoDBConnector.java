@@ -11,7 +11,7 @@ public class MongoDBConnector {
 
     private MongoDBConnector(){
         this.mongoClient = MongoClients.create("mongodb+srv://240023_db_user:Qzmpwxno1029.@cluster1.0thd0jq.mongodb.net");
-        this.database = mongoClient.getDatabase("gimnasio");
+        this.database = mongoClient.getDatabase("Todo");
     }
 
     public static MongoDatabase getDatabase() {

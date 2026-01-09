@@ -1,22 +1,94 @@
 package com.example.actividad3.tareas.domain;
 
-import com.example.actividad3.tareas.domain.context.Estado;
-import com.example.actividad3.tareas.domain.context.Prioridad;
+import com.example.actividad3.tareas.domain.entities.Estado;
+import com.example.actividad3.tareas.domain.entities.Prioridad;
 import com.example.actividad3.usuarios.domain.Usuario;
-import com.example.actividad3.usuarios.domain.UsuarioRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Tarea {
+    private String id;
     private String texto;
     private Prioridad prioridad;
     private Estado estado;
-    private Date fechaCreacion;
-    private Date fechaFinalizacion;
+    private Date fechaCreacion, fechaFinalizacion;
     private Usuario propietario;
     private List<Usuario> usuariosAsignados = new ArrayList<>();
 
+    public Tarea() {
+    }
 
+    public String getId() {
+        return id;
+    }
+
+    public Tarea setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public Tarea setTexto(String texto) {
+        this.texto = texto;
+        return this;
+    }
+
+    public Prioridad getPrioridad() {
+        return prioridad;
+    }
+
+    public Tarea setPrioridad(Prioridad prioridad) {
+        this.prioridad = prioridad;
+        return this;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public Tarea setEstado(Estado estado) {
+        this.estado = estado;
+        return this;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public Tarea setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+        return this;
+    }
+
+    public Date getFechaFinalizacion() {
+        return fechaFinalizacion;
+    }
+
+    public Tarea setFechaFinalizacion(Date fechaFinalizacion) {
+        this.fechaFinalizacion = fechaFinalizacion;
+        return this;
+    }
+
+    public Usuario getPropietario() {
+        return propietario;
+    }
+
+    public Tarea setPropietario(Usuario propietario) {
+        this.propietario = propietario;
+        return this;
+    }
+
+    public List<Usuario> getUsuariosAsignados() {
+        return usuariosAsignados;
+    }
+
+    public Tarea setUsuariosAsignados(List<Usuario> usuariosAsignados) {
+        this.usuariosAsignados = usuariosAsignados;
+        return this;
+    }
 }
