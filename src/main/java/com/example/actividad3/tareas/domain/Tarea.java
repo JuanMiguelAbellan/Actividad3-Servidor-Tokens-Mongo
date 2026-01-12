@@ -9,23 +9,24 @@ import java.util.Date;
 import java.util.List;
 
 public class Tarea {
-    private String id;
+    private String _id;
     private String texto;
     private Prioridad prioridad;
     private Estado estado;
     private Date fechaCreacion, fechaFinalizacion;
     private Usuario propietario;
-    private List<Usuario> usuariosAsignados = new ArrayList<>();
+    private List<String> usuariosAsignados = new ArrayList<>();
 
     public Tarea() {
+        this.fechaCreacion = new Date();
     }
 
     public String getId() {
-        return id;
+        return _id;
     }
 
     public Tarea setId(String id) {
-        this.id = id;
+        this._id = id;
         return this;
     }
 
@@ -83,12 +84,15 @@ public class Tarea {
         return this;
     }
 
-    public List<Usuario> getUsuariosAsignados() {
+    public List<String> getUsuariosAsignados() {
         return usuariosAsignados;
     }
 
-    public Tarea setUsuariosAsignados(List<Usuario> usuariosAsignados) {
+    public Tarea setUsuariosAsignados(List<String> usuariosAsignados) {
         this.usuariosAsignados = usuariosAsignados;
         return this;
+    }
+    public void asignar(Usuario usuario){
+        this.usuariosAsignados.add(usuario.getEmail());
     }
 }
