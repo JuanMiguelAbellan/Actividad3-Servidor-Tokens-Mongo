@@ -3,7 +3,10 @@ package com.example.actividad3.context.db;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
+import org.checkerframework.checker.compilermsgs.qual.CompilerMessageKey;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MongoDBConnector {
     private static MongoDBConnector mongoConnection;
     private final MongoClient mongoClient;

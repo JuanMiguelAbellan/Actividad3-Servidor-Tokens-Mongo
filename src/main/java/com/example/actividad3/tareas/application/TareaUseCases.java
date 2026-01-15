@@ -26,16 +26,29 @@ public class TareaUseCases {
         this.tareaRepository.crearTarea(tarea);
     }
 
-    public Tarea asignar(Usuario usuario, String id){
-        return this.tareaRepository.asignar(usuario, id);
+    public Tarea asignar(Usuario propietario, Usuario usuario, String id){
+        if(tareaRepository.comprobarPropietario(propietario.getEmail(), id)) {
+            return this.tareaRepository.asignar(usuario, id);
+        }
+        else return null;
     }
 
-    public Tarea cambiarEstado(String id, String estado) {
-        return this.tareaRepository.cambiarEstado(id, estado);
+    public Tarea cambiarEstado(Usuario propietario, String id, String estado) {
+
+        if(this.tareaRepository.comprobarPropietario(propietario.getEmail(), id)) {
+            System.out.println(estado+id+propietario.getEmail());
+            return this.tareaRepository.cambiarEstado(id, estado);
+        }else {
+            return null;
+        }
     }
 
-    public Tarea cambiarDatos(String id, Tarea tarea) {
-        return this.tareaRepository.cambiarDatos(id, tarea);
+    public Tarea cambiarDatos(Usuario propietario, String id, Tarea tarea) {
+        if(this.tareaRepository.comprobarPropietario(propietario.getEmail(), id)){
+            return this.tareaRepository.cambiarDatos(id, tarea);
+        }else {
+            return null;
+        }
     }
 
     public boolean comprobarPropietario(String eamil, String id){

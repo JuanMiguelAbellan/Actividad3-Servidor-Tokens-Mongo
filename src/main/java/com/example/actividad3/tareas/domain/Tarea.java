@@ -1,7 +1,5 @@
 package com.example.actividad3.tareas.domain;
 
-import com.example.actividad3.tareas.domain.entities.Estado;
-import com.example.actividad3.tareas.domain.entities.Prioridad;
 import com.example.actividad3.usuarios.domain.Usuario;
 
 import java.util.ArrayList;
@@ -11,14 +9,13 @@ import java.util.List;
 public class Tarea {
     private String _id;
     private String texto;
-    private Prioridad prioridad;
-    private Estado estado;
-    private Date fechaCreacion, fechaFinalizacion;
+    private String prioridad;
+    private String estado;
+    private String fecha_creacion, fecha_finalizacion;
     private Usuario propietario;
     private List<String> usuariosAsignados = new ArrayList<>();
 
     public Tarea() {
-        this.fechaCreacion = new Date();
     }
 
     public String getId() {
@@ -39,39 +36,39 @@ public class Tarea {
         return this;
     }
 
-    public Prioridad getPrioridad() {
+    public String getPrioridad() {
         return prioridad;
     }
 
-    public Tarea setPrioridad(Prioridad prioridad) {
+    public Tarea setPrioridad(String prioridad) {
         this.prioridad = prioridad;
         return this;
     }
 
-    public Estado getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public Tarea setEstado(Estado estado) {
+    public Tarea setEstado(String estado) {
         this.estado = estado;
         return this;
     }
 
-    public Date getFechaCreacion() {
-        return fechaCreacion;
+    public String getFechaCreacion() {
+        return fecha_creacion;
     }
 
-    public Tarea setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public Tarea setFechaCreacion(String fechaCreacion) {
+        this.fecha_creacion = fechaCreacion;
         return this;
     }
 
-    public Date getFechaFinalizacion() {
-        return fechaFinalizacion;
+    public String getFechaFinalizacion() {
+        return fecha_finalizacion;
     }
 
-    public Tarea setFechaFinalizacion(Date fechaFinalizacion) {
-        this.fechaFinalizacion = fechaFinalizacion;
+    public Tarea setFechaFinalizacion(String fechaFinalizacion) {
+        this.fecha_finalizacion = fechaFinalizacion;
         return this;
     }
 

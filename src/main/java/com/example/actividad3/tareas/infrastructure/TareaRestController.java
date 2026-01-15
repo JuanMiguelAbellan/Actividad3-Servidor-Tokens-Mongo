@@ -2,12 +2,12 @@ package com.example.actividad3.tareas.infrastructure;
 
 import com.example.actividad3.tareas.application.TareaUseCases;
 import com.example.actividad3.tareas.domain.Tarea;
-import com.example.actividad3.tareas.domain.entities.Estado;
 import com.example.actividad3.usuarios.domain.Usuario;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -26,8 +26,10 @@ public class TareaRestController {
     }
 
     @GetMapping("/api/tareas/{id}")
-    public Tarea tareaDetalle(Authentication auth){
-        return null;
+    public Tarea tareaDetalle(Authentication auth,
+                                @PathVariable String id){
+        Usuario usuario = new Usuario(auth.getName(), null);
+        return  this.tareaUseCases.getDetalleTarea(id);
     }
 
     @PostMapping("/api/tareas")
@@ -38,8 +40,8 @@ public class TareaRestController {
         List<String> usuariosAsignados= new ArrayList<>();
         usuariosAsignados.add(usuario.getEmail());
         tarea.setUsuariosAsignados(usuariosAsignados);
-        tarea.setEstado(Estado.Pendiente);
-        System.out.println(tarea.getId());
+        tarea.setEstado("Pendiente");
+        tarea.setFechaCreacion(new Date().toString());
         this.tareaUseCases.crearTarea(tarea);
     }
 
@@ -48,7 +50,7 @@ public class TareaRestController {
                                      @RequestBody Usuario user,
                                      @PathVariable String id){
         Usuario usuario = new Usuario(auth.getName(), null);
-        return this.tareaUseCases.asignar(user, id);
+        return this.tareaUseCases.asignar(usuario, user, id);
     }
 
     @PutMapping("/api/tareas/{id}/estado")
@@ -56,7 +58,7 @@ public class TareaRestController {
                                @RequestBody String estado,
                                @PathVariable String id){
         Usuario usuario = new Usuario(auth.getName(), null);
-        return this.tareaUseCases.cambiarEstado(estado, id);
+        return this.tareaUseCases.cambiarEstado(usuario, id, estado);
     }
 
     @PutMapping("/api/tareas/{id}/datos")
@@ -64,6 +66,6 @@ public class TareaRestController {
                                @RequestBody Tarea tarea,
                                @PathVariable String id){
         Usuario usuario = new Usuario(auth.getName(), null);
-        return this.tareaUseCases.cambiarDatos(id, tarea);
+        return this.tareaUseCases.cambiarDatos(usuario, id, tarea);
     }
 }
