@@ -108,7 +108,7 @@ public class TareaRepositoryMongo implements TareaRepository {
             collection.updateOne(Filters.eq("id", id), Updates.set("prioridad", tarea.getPrioridad().toString()));
         }
         if(tarea.getEstado() != "" && tarea.getEstado() != null){
-            //Si cambia es estado a finalizado poner la fecha de finalizacion
+            //Si cambia es estado a finalizado poner la fecha de finalizacion y si esta finalizada no se puede cambiar
             collection.updateOne(Filters.eq("id", id), Updates.set("estado", tarea.getEstado().toString()));
         }
         if(tarea.getUsuariosAsignados() != null || !tarea.getUsuariosAsignados().isEmpty()){
