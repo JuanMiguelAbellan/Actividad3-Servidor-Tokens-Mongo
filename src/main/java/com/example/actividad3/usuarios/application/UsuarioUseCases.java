@@ -17,7 +17,7 @@ public class UsuarioUseCases {
         String password = Hashing.sha256()
                 .hashString(usuario.getPassword(), StandardCharsets.UTF_8)
                 .toString();
-        Usuario cifrado = new Usuario(usuario.getEmail(), password);
+        Usuario cifrado = new Usuario().setEmail(usuario.getEmail()).setPassword(password);
         return this.usuarioRepository.registro(cifrado);
     }
 

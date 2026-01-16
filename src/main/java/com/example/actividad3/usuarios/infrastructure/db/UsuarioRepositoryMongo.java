@@ -27,7 +27,7 @@ public class UsuarioRepositoryMongo implements UsuarioRepository {
         for(Document document : iterable){
             System.out.println();
             if(document.getString("email").toString().equals(usuario.getEmail())){
-                return new Usuario(document.getString("email").toString(), document.getString("password").toString());
+                return new Usuario().setEmail(document.getString("email")).setPassword(document.getString("password"));
             }
         }
         return null;

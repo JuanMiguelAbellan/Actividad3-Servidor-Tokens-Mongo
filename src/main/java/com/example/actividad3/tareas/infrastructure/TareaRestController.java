@@ -21,22 +21,22 @@ public class TareaRestController {
 
     @GetMapping("/api/tareas")
     public List<Tarea> verTareas(Authentication auth ){
-        Usuario usuario = new Usuario(auth.getName(), null);
+        Usuario usuario = new Usuario().setEmail(auth.getName());
         return  this.tareaUseCases.getTareas(usuario.getEmail());
     }
 
     @GetMapping("/api/tareas/{id}")
     public Tarea tareaDetalle(Authentication auth,
                                 @PathVariable String id){
-        Usuario usuario = new Usuario(auth.getName(), null);
+        Usuario usuario = new Usuario().setEmail(auth.getName());
         return  this.tareaUseCases.getDetalleTarea(id);
     }
 
     @PostMapping("/api/tareas")
     public void crearTarea(Authentication auth,
                             @RequestBody Tarea tarea){
-        Usuario usuario = new Usuario(auth.getName(), null);
-        tarea.setPropietario(new Usuario(usuario.getEmail(), null));
+        Usuario usuario = new Usuario().setEmail(auth.getName());
+        tarea.setPropietario(usuario);
         List<String> usuariosAsignados= new ArrayList<>();
         usuariosAsignados.add(usuario.getEmail());
         tarea.setUsuariosAsignados(usuariosAsignados);
@@ -49,7 +49,7 @@ public class TareaRestController {
     public Tarea asignarUsuarioTarea(Authentication auth,
                                      @RequestBody Usuario user,
                                      @PathVariable String id){
-        Usuario usuario = new Usuario(auth.getName(), null);
+        Usuario usuario = new Usuario().setEmail(auth.getName());
         return this.tareaUseCases.asignar(usuario, user, id);
     }
 
@@ -57,7 +57,7 @@ public class TareaRestController {
     public Tarea cambiarEstado(Authentication auth,
                                @RequestBody String estado,
                                @PathVariable String id){
-        Usuario usuario = new Usuario(auth.getName(), null);
+        Usuario usuario = new Usuario().setEmail(auth.getName());
         return this.tareaUseCases.cambiarEstado(usuario, id, estado);
     }
 
@@ -65,7 +65,7 @@ public class TareaRestController {
     public Tarea cambiarDatos(Authentication auth,
                                @RequestBody Tarea tarea,
                                @PathVariable String id){
-        Usuario usuario = new Usuario(auth.getName(), null);
+        Usuario usuario = new Usuario().setEmail(auth.getName());
         return this.tareaUseCases.cambiarDatos(usuario, id, tarea);
     }
 }

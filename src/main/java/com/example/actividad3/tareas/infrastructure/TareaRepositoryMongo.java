@@ -31,7 +31,7 @@ public class TareaRepositoryMongo implements TareaRepository {
                         .setFechaCreacion(document.getString("fecha_creacion"))
                         .setFechaFinalizacion(document.getString("fecha_dinalizacion"))
                         .setEstado(document.getString("estado"))
-                        .setPropietario(new Usuario(document.getString("usuario_propietario"), null));
+                        .setPropietario(new Usuario().setEmail(document.getString("usuario_propietario")));
 
                 List<String> usuariosAignados = (ArrayList)document.get("usuarios_asignados");
                 tarea.setUsuariosAsignados(usuariosAignados);
@@ -51,11 +51,11 @@ public class TareaRepositoryMongo implements TareaRepository {
                 Tarea tarea = new Tarea();
                 tarea.setId(document.getString("id"))
                                 .setTexto(document.getString("texto"))
-                                        .setPrioridad(document.getString("prioridad"))
-                                                .setFechaCreacion(document.getString("fecha_creacion"))
-                                                        .setFechaFinalizacion(document.getString("fecha_finalizacion"))
-                                                                .setEstado(document.getString("estado"))
-                                                                        .setPropietario(new Usuario(document.getString("usuario_propietario"), null));
+                                .setPrioridad(document.getString("prioridad"))
+                                .setFechaCreacion(document.getString("fecha_creacion"))
+                                .setFechaFinalizacion(document.getString("fecha_finalizacion"))
+                                .setEstado(document.getString("estado"))
+                                .setPropietario(new Usuario().setEmail(document.getString("usuario_propietario")));
                 List<String> usuariosAignados = (ArrayList)document.get("usuarios_asignados");
                 tarea.setUsuariosAsignados(usuariosAignados);
                 listaTareas.add(tarea);
@@ -101,25 +101,20 @@ public class TareaRepositoryMongo implements TareaRepository {
     public Tarea cambiarDatos(String id, Tarea tarea) {
         MongoCollection<Document> collection = MongoDBConnector.getDatabase().getCollection("tareas");
 
-        if(tarea.getTexto() != ""){
+        if(tarea.getTexto() != "" && tarea.getTexto() != null){
             collection.updateOne(Filters.eq("id", id), Updates.set("texto", tarea.getTexto()));
         }
-        if(tarea.getPrioridad() != null){
+        if(tarea.getPrioridad() != "" && tarea.getPrioridad() != null){
             collection.updateOne(Filters.eq("id", id), Updates.set("prioridad", tarea.getPrioridad().toString()));
         }
-        if(tarea.getEstado() != null){
+        if(tarea.getEstado() != "" && tarea.getEstado() != null){
+            //Si cambia es estado a finalizado poner la fecha de finalizacion
             collection.updateOne(Filters.eq("id", id), Updates.set("estado", tarea.getEstado().toString()));
         }
-        if(tarea.getPropietario() != null){
-            collection.updateOne(Filters.eq("id", id), Updates.set("usuario_propietario", tarea.getPropietario().getEmail()));
-        }
         if(tarea.getUsuariosAsignados() != null || !tarea.getUsuariosAsignados().isEmpty()){
-            collection.updateOne(Filters.eq("id", id), Updates.set("usuarios_asigandos", tarea.getUsuariosAsignados()));
+            collection.updateOne(Filters.eq("id", id), Updates.set("usuarios_asignados", tarea.getUsuariosAsignados()));
         }
-        if(tarea.getFechaCreacion() != null){
-            collection.updateOne(Filters.eq("id", id), Updates.set("fecha_creacion", tarea.getFechaCreacion()));
-        }
-        if(tarea.getFechaFinalizacion() != null){
+        if(tarea.getFechaFinalizacion() != "" && tarea.getFechaFinalizacion() != null){
             collection.updateOne(Filters.eq("id", id), Updates.set("fecha_finalizacion", tarea.getFechaFinalizacion()));
         }
 
