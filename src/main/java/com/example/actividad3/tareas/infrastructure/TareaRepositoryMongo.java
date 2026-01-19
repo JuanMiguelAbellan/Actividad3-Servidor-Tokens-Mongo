@@ -29,7 +29,7 @@ public class TareaRepositoryMongo implements TareaRepository {
                         .setTexto(document.getString("texto"))
                         .setPrioridad(document.getString("prioridad"))
                         .setFechaCreacion(document.getString("fecha_creacion"))
-                        .setFechaFinalizacion(document.getString("fecha_dinalizacion"))
+                        .setFechaFinalizacion(document.getString("fecha_finalizacion"))
                         .setEstado(document.getString("estado"))
                         .setPropietario(new Usuario().setEmail(document.getString("usuario_propietario")));
 
@@ -110,12 +110,10 @@ public class TareaRepositoryMongo implements TareaRepository {
         if(tarea.getEstado() != "" && tarea.getEstado() != null){
             //Si cambia es estado a finalizado poner la fecha de finalizacion y si esta finalizada no se puede cambiar
             collection.updateOne(Filters.eq("id", id), Updates.set("estado", tarea.getEstado().toString()));
+            collection.updateOne(Filters.eq("id", id), Updates.set("fecha_finalizacion", new Date().toString()));
         }
         if(tarea.getUsuariosAsignados() != null || !tarea.getUsuariosAsignados().isEmpty()){
             collection.updateOne(Filters.eq("id", id), Updates.set("usuarios_asignados", tarea.getUsuariosAsignados()));
-        }
-        if(tarea.getFechaFinalizacion() != "" && tarea.getFechaFinalizacion() != null){
-            collection.updateOne(Filters.eq("id", id), Updates.set("fecha_finalizacion", tarea.getFechaFinalizacion()));
         }
 
         return getDetalleTarea(id);
@@ -123,7 +121,7 @@ public class TareaRepositoryMongo implements TareaRepository {
 
     @Override
     public boolean comprobarPropietario(String email, String id) {
-        System.out.println(email+id);
+
         MongoCollection<Document> collection = MongoDBConnector.getDatabase().getCollection("tareas");
         FindIterable<Document> iterable = collection.find();
         for(Document document: iterable){
