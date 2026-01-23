@@ -32,4 +32,8 @@ public class UsuarioUseCases {
         }
         else return null;
     }
+
+    public void reset(){
+        this.usuarioRepository.reset();
+    }
 }

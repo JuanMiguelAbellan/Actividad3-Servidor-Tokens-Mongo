@@ -55,13 +55,13 @@ public class TareaRepositoryMongo implements TareaRepository {
                                 .setFechaCreacion(document.getString("fecha_creacion"))
                                 .setFechaFinalizacion(document.getString("fecha_finalizacion"))
                                 .setEstado(document.getString("estado"))
-                                .setPropietario(new Usuario().setEmail(document.getString("usuario_propietario")));
+                                .setPropietario(emailPropietario);
                 List<String> usuariosAignados = (ArrayList)document.get("usuarios_asignados");
                 tarea.setUsuariosAsignados(usuariosAignados);
                 listaTareas.add(tarea);
             }
         }
-        return null;
+        return listaTareas;
     }
 
     @Override
@@ -130,5 +130,10 @@ public class TareaRepositoryMongo implements TareaRepository {
             }
         }
         return false;
+    }
+
+    @Override
+    public void reset() {
+        MongoDBConnector.getDatabase().getCollection("tareas").drop();
     }
 }

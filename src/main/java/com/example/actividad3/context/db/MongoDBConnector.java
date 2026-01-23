@@ -4,13 +4,19 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import org.checkerframework.checker.compilermsgs.qual.CompilerMessageKey;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MongoDBConnector {
     private static MongoDBConnector mongoConnection;
-    private final MongoClient mongoClient;
+    private MongoClient mongoClient;
     private final MongoDatabase database;
+
+    /*@Value("${spring.datasource.url}")
+    public void setDbUrl(String url) {
+        this.mongoClient = MongoClients.create(url);
+    }*/
 
     private MongoDBConnector(){
         this.mongoClient = MongoClients.create("mongodb+srv://240023_db_user:Qzmpwxno1029.@cluster1.0thd0jq.mongodb.net");

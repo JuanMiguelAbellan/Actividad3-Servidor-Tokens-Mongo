@@ -80,6 +80,10 @@ public class Tarea {
         this.propietario = propietario;
         return this;
     }
+    public Tarea setPropietario(String propietario) {
+        this.propietario = new Usuario().setEmail(propietario);
+        return this;
+    }
 
     public List<String> getUsuariosAsignados() {
         return usuariosAsignados;

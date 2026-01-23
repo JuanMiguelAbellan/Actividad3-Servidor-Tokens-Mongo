@@ -32,4 +32,9 @@ public class UsuarioRepositoryMongo implements UsuarioRepository {
         }
         return null;
     }
+
+    @Override
+    public void reset() {
+        MongoDBConnector.getDatabase().getCollection("usuarios").drop();
+    }
 }

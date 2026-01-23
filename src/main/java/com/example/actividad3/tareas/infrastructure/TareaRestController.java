@@ -9,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-@CrossOrigin(origins = "*")
 @RestController
 public class TareaRestController {
 
@@ -19,23 +18,18 @@ public class TareaRestController {
         this.tareaUseCases= new TareaUseCases(new TareaRepositoryMongo());
     }
 
-    @CrossOrigin(origins = "*")
     @GetMapping("/api/tareas")
     public List<Tarea> verTareas(Authentication auth ){
         Usuario usuario = new Usuario().setEmail(auth.getName());
         return  this.tareaUseCases.getTareas(usuario.getEmail());
     }
 
-    @GetMapping("/ejemplo/simple")
-    public String ejemplo(){
-        System.out.println("Ha heco la peticion");
-        return "Pensando";
-    }
 
     @GetMapping("/api/tareas/{id}")
     public Tarea tareaDetalle(Authentication auth,
                                 @PathVariable String id){
         Usuario usuario = new Usuario().setEmail(auth.getName());
+        System.out.println("Ha entrado");
         return  this.tareaUseCases.getDetalleTarea(id);
     }
 

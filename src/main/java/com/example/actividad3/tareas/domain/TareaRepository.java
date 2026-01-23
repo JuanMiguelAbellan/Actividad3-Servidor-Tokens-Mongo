@@ -13,4 +13,5 @@ public interface TareaRepository {
     public Tarea cambiarEstado(String id,String estado);
     public Tarea cambiarDatos(String id, Tarea tarea);
     public boolean comprobarPropietario(String email, String id);
+    public void reset();
 }
