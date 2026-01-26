@@ -16,6 +16,7 @@ public class JwtService {
     private static final long EXPIRATION = 1000 * 60 * 60; // 1h
     private static final String SECRET = "clave-secreta-actividad3-que-tiene-que-ser-de-almenos-64char";
 
+
     private final Key key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
 
     public String generateToken(String email) {

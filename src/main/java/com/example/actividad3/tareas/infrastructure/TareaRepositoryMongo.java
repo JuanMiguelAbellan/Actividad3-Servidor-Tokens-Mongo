@@ -90,7 +90,6 @@ public class TareaRepositoryMongo implements TareaRepository {
 
     @Override
     public Tarea cambiarEstado(String id, String estado) {
-        System.out.println(estado+id);
         MongoCollection<Document> collection = MongoDBConnector.getDatabase().getCollection("tareas");
         collection.updateOne(Filters.eq("id", id), Updates.set("estado", estado));
 
@@ -107,7 +106,7 @@ public class TareaRepositoryMongo implements TareaRepository {
         if(tarea.getPrioridad() != "" && tarea.getPrioridad() != null){
             collection.updateOne(Filters.eq("id", id), Updates.set("prioridad", tarea.getPrioridad().toString()));
         }
-        if(tarea.getEstado() != "" && tarea.getEstado() != null){
+        if(tarea.getEstado() != "" && tarea.getEstado() != null && tarea.getEstado()== "Finalizado"){
             //Si cambia es estado a finalizado poner la fecha de finalizacion y si esta finalizada no se puede cambiar
             collection.updateOne(Filters.eq("id", id), Updates.set("estado", tarea.getEstado().toString()));
             collection.updateOne(Filters.eq("id", id), Updates.set("fecha_finalizacion", new Date().toString()));

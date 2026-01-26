@@ -51,10 +51,6 @@ public class TareaUseCases {
         }
     }
 
-    public boolean comprobarPropietario(String eamil, String id){
-        return this.tareaRepository.comprobarPropietario(eamil, id);
-    }
-
     public void reset(){
         this.tareaRepository.reset();
     }
