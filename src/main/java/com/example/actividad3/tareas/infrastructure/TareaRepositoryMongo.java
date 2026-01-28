@@ -107,6 +107,11 @@ public class TareaRepositoryMongo implements TareaRepository {
         }
         tarea.setUsuariosAsignados(usuariosAsignados);
         tareas.add(tarea);
+
+        Para filtrar por id del ususario que este dentro de asistentes
+        Document filtro = new Document("asistentes.id", usuarioId);
+
+        FindIterable<Document> iterable = collection.find(filtro);
         */
 
 
