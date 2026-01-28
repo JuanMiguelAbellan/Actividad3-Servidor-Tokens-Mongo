@@ -77,6 +77,39 @@ public class TareaRepositoryMongo implements TareaRepository {
         document.append("usuario_propietario", tarea.getPropietario().getEmail());
         document.append("usuarios_asignados", tarea.getUsuariosAsignados());
 
+        /*Para insertar el array solo con los campos que queremos
+        List<Document> asistentesList = new ArrayList<>();
+        for(Usuario u : tarea.getUsuariosAsignados){
+         if (u != null && u.getId() != null) {
+            asistentesList.add(new Document()
+                    .append("id", u.getId())
+                    .append("email", u.getEmail())
+            );
+         }
+        }
+        document.append("asistentes", asistentesList);
+
+        Para hacer el select habria que crear una nueva clase UsuarioResumenDTO solo con los campos que se quieran mostrar y en lugar de new Ususario() seria new UsuarioResumenDTO()
+        Y para que la tarea tenga una unica lista hacer una interfaz Usuario y los DTO que la implementen y la lista es de la interfaz
+        O 2 DTO de tareas, una con lista de Usuarios normales y otra con lista de UsuariosResumen
+
+        List<Document> asistentesDocs = (List<Document>) doc.get("asistentes");
+        List<UsuarioResumenDTO> usuariosAsignados = new ArrayList<>();
+
+        if (asistentesDocs != null) {
+            for (Document asistenteDoc : asistentesDocs) {
+                UsuarioResumenDTO usuario = new UsuarioRsumenDTO()
+                        .setId(asistenteDoc.getString("id"))
+                        .setEmail(asistenteDoc.getString("email"));
+
+                usuariosAsignados.add(usuario);
+            }
+        }
+        tarea.setUsuariosAsignados(usuariosAsignados);
+        tareas.add(tarea);
+        */
+
+
         MongoDBConnector.getDatabase().getCollection("tareas").insertOne(document);
     }
 
