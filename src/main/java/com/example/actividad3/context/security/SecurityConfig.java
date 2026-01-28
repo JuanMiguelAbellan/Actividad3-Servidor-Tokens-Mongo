@@ -47,7 +47,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // Permite el origen de tu frontend (ajusta el puerto si es necesario, ej: http://localhost:5173 para react con vite)
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5500", "http://127.0.0.1:5500", "https://front-iadocs.s3.us-east-1.amazonaws.com"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080", "http://127.0.0.1:8080"));
 
         // Permite los métodos HTTP comunes
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
