@@ -112,6 +112,9 @@ public class TareaRepositoryMongo implements TareaRepository {
         Document filtro = new Document("asistentes.id", usuarioId);
 
         FindIterable<Document> iterable = collection.find(filtro);
+
+        O
+        FindIterable<Document> iterable = collection.find(Filters.eq("asistentes.id", usuarioId));
         */
 
 
@@ -171,6 +174,8 @@ public class TareaRepositoryMongo implements TareaRepository {
 
     @Override
     public void reset() {
+        //Para borrar los datos sin dropear toda la coleccion, por que al poner un  documento vacio significa todos los documentos si quisieramos borrar todos los de un usuario deleteMany({propietario: "id"}) o deleteMany(Filters.eq("anfitrion", usuarioId))
+        // MongoDBConnector.getDatabase().getCollection("tareas").deleteMany(new Document());
         MongoDBConnector.getDatabase().getCollection("tareas").drop();
     }
 }
