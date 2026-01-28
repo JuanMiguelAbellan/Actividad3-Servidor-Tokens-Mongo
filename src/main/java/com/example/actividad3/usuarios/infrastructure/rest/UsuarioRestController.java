@@ -7,6 +7,7 @@ public class UsuarioRestController {
 
     @GetMapping
     public String verToken(Authentication auth) {
+        System.out.println(auth);
         return "Email del token: " + auth.getName();
     }
 }
