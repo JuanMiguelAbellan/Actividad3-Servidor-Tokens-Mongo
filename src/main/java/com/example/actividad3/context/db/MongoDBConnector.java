@@ -14,6 +14,15 @@ public class MongoDBConnector {
     private  MongoDatabase database;
 
 
+    /*public void setDbUrl(String url) {
+        this.mongoClient = MongoClients.create(url);
+    }
+
+    @Value("${spring.datasource.db}")
+    public void setDatabase(String db) {
+        this.database = mongoClient.getDatabase(db);
+    }*/
+
     private MongoDBConnector(){
         this.mongoClient = MongoClients.create("mongodb+srv://240023_db_user:Qzmpwxno1029.@cluster1.0thd0jq.mongodb.net");
         this.database = mongoClient.getDatabase("Todo");
